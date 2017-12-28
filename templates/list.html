@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Welcome! | Inventory Register</title>
+    </head>
+    <body>
+        <h1>Inventory Register</h1>
+        <br>
+        <a href="/story">Add new Item Story</a>
+        <br><br>
+        <table>
+            <tr>
+                <th>Item Id</th>
+                <th>Storage Unit ID</th>
+                <th>Box ID</th>
+                <th>Item Type</th>
+                <th>Status</th>
+                <th>Comment</th>
+            </tr>
+            {% if table is not none %}
+                {% for row in table %}
+                    <tr>
+                        {% for item in row %}
+                            {% if item == row[0] %}
+                                <td><a href="/story/{{ row[0] }}">{{ item }}</a></td>
+                            {% else %}
+                                <td>
+                                    {% for para in item.split('\n') %}
+                                        {{ para }}<br>
+                                    {% endfor %}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+    </body>
+</html>
