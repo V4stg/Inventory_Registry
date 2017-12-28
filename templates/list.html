@@ -24,6 +24,8 @@
                         {% for item in row %}
                             {% if item == row[0] %}
                                 <td><a href="/story/{{ row[0] }}">{{ item }}</a></td>
+                            {% elif item == row[1] or item == row[2] %}
+                                <td><a href="/{{ item }}">{{ item }}</a></td>
                             {% else %}
                                 <td>
                                     {% for para in item.split('\n') %}

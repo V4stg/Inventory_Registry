@@ -24,14 +24,23 @@ def write_file(table):
 
 
 @app.route('/')
-@app.route('/list')
-def index():
+@app.route('/<id>')
+def index(id=None):
     try:
         table_text = read_file()
     except FileNotFoundError:
         table_text = []
-    if 'table' in session:
-        table_text = session['table']
+    if id is None:
+        if 'table' in session:
+            table_text = session['table']
+    else:
+        new_table = []
+        for row in table_text:
+            if id[0].upper() in ("S", "P") and id == row[1]:
+                new_table.append(row)
+            if id[0].upper() in ("D",) and id == row[2]:
+                new_table.append(row)
+        table_text = new_table
     return render_template('list.html', table=table_text)
 
 
